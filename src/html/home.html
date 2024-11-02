@@ -1,8 +1,69 @@
 {% extends "base" %}
 
 {% block content %}
-<div class="text-center">
-    <h1 class="text-4xl font-bold mb-4">Jesus is Lord!</h1>
-    <p class="text-xl">Welcome to our Cloudflare Development Playground</p>
-</div>
-{% endblock content %}
+<section
+        class="border-b border-blue-200 min-h-[20vh] w-full mb-8 rounded-t-lg flex flex-col items-center justify-center bg-[#EEEEEE] text-center text-gray-800">
+    <h1 class="text-5xl font-bold mb-6 tracking-tight">
+        What is this exactly?
+    </h1>
+    <p class="text-xl leading-relaxed  max-w-2xl mx-auto">
+        Experience Cloudflare's powerful primitives in action within this dynamic playground featuring real-time
+        integration examples.<br>
+        Like what you see? We can build it for your business needs.</p>
+</section>
+
+
+<section
+        class="mx-8 mb-4 p-4 md:p-8 flex flex-col xl:flex-row gap-y-6 rounded-lg border border-blue-200 relative overflow-hidden"
+        style="background-image: url('https://pub-352c73d5e0cd4c4f9636bc4c96640e60.r2.dev/Images/bluehexagon.svg');">
+    <article class="flex flex-col gap-y-3 w-full xl:w-1/2">
+        <h1 class="text-4xl tracking-tight">
+            <a href="https://developers.cloudflare.com/workers/" target="_blank"
+               class="items-center flex hover:opacity-80">
+                <svg width="1.2em" height="1.2em" viewBox="0 0 48 49" class="text-[#F6821F] text-4xl mr-2"
+                     data-icon="workers">
+                    <symbol id="ai:local:workers">
+                        <path fill="currentColor"
+                              d="m18.63 37.418-9.645-12.9 9.592-12.533-1.852-2.527L5.917 23.595l-.015 1.808 10.86 14.542z"></path>
+                        <path fill="currentColor"
+                              d="M21.997 6.503h-3.712l13.387 18.3-13.072 17.7h3.735L35.4 24.81z"></path>
+                        <path fill="currentColor"
+                              d="M29.175 6.503h-3.758l13.598 18.082-13.598 17.918h3.765l12.908-17.01v-1.808z"></path>
+                    </symbol>
+                    <use xlink:href="#ai:local:workers"></use>
+                </svg>
+                <strong>Cloudflare Workers</strong>
+            </a>
+        </h1>
+        <p class="text-xl leading-relaxed max-w-2xl mx-auto">
+            Enables building serverless applications and deploying them instantly across the globe with exceptional
+            performance, reliability, and scale.
+        </p>
+        <p class="text-xl leading-relaxed max-w-2xl mx-auto">
+            <!--            <mark class="text-blue-700 bg-white border border-blue-700 w-fit items-center rounded px-2 py-1 uppercase font-code">New</mark>-->
+            <a href="https://github.com/cloudflare/workers-rs" target="_blank" rel="noreferrer"
+               class="group inline-block underline focus:no-underline hover:no-underline">
+                Workers-rs
+            </a>
+            is a ergonomic Rust bindings to Cloudflare Workers environment. We write all our workers in Rust!
+            <a href="/" class="focus:outline-none ">
+                <button class="mt-4 flex items-center gap-3 bg-blue-500 text-white rounded-lg py-3 px-6 hover:bg-blue-600 transition-all duration-300 transform active:scale-95">
+                    <strong class="font-semibold leading-none" aria-label="Click to try">Try Workers-rs</strong>
+                    <svg class="w-5 h-5 flex-shrink-0 transform translate-y-0.5" fill="currentColor" aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M13 3l-1.414 1.414L16.172 9H4v2h12.172l-4.586 4.586L13 17l7-7-7-7z"></path>
+                    </svg>
+                </button>
+            </a>
+        </p>
+
+
+    </article>
+    <figure class="hidden md:block xl:w-1/2 self-end">
+        <img alt="Cloudflare Rust Workers with WASM"
+             src="https://pbs.twimg.com/profile_banners/300637864/1590078222/1500x500"
+             class="w-full h-auto object-contain translate-y-10 translate-x-20">
+    </figure>
+</section>
+{% endblock %}
+

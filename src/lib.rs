@@ -9,6 +9,8 @@ fn create_tera() -> Tera {
         .unwrap();
     tera.add_raw_template("footer", include_str!("./html/footer.html"))
         .unwrap();
+    tera.add_raw_template("sidebar", include_str!("./html/sidebar.html"))
+        .unwrap();
     tera.add_raw_template("home", include_str!("./html/home.html"))
         .unwrap();
     tera.add_raw_template("about", include_str!("./html/about.html"))
