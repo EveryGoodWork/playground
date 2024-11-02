@@ -19,3 +19,5 @@ worker = { version="0.4.2", features=['http'] }
 worker-macros = { version="0.4.2", features=['http'] }
 console_error_panic_hook = { version = "0.1.1" }
 http = "1.1"
+tera = { version = "1.20.0", default-features = false }
+getrandom = { version = "0.2.15", features = ["js"] }
