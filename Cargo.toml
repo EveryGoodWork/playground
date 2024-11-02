@@ -2,7 +2,7 @@
 name = "playground"
 version = "0.1.0"
 edition = "2021"
-authors = [ "PeterMHammond <anonymous@example.com>" ]
+authors = [ "PeterMHammond" ]
 
 [package.metadata.release]
 release = false
