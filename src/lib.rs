@@ -1,4 +1,7 @@
+use axum::response::IntoResponse;
+use axum::{response::Html, routing::get, Router};
 use tera::{Context as TeraContext, Tera};
+use tower_service::Service;
 use worker::*;
 
 fn create_tera() -> Tera {
@@ -20,35 +23,52 @@ fn create_tera() -> Tera {
     tera
 }
 
-async fn render_template(template: &str, title: &str) -> Result<Response> {
+async fn render_template(template: &str, title: &str) -> axum::response::Response {
     let tera = create_tera();
     let mut context = TeraContext::new();
     context.insert("title", title);
 
     match tera.render(template, &context) {
-        Ok(html) => {
-            let mut headers = Headers::new();
-            headers.set("Content-Type", "text/html")?;
-            Ok(Response::ok(html)?.with_headers(headers))
-        }
-        Err(e) => Response::error(e.to_string(), 500),
+        Ok(html) => Html(html).into_response(),
+        Err(e) => (
+            axum::http::StatusCode::INTERNAL_SERVER_ERROR,
+            format!("Template error: {}", e),
+        )
+            .into_response(),
     }
 }
 
-#[event(fetch)]
-pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
+fn router() -> Router {
     Router::new()
-        .get_async(
-            "/",
-            |_, _| async move { render_template("home", "Home").await },
+        .route("/", get(|| async { render_template("home", "Home").await }))
+        .route(
+            "/about",
+            get(|| async { render_template("about", "About Us").await }),
         )
-        .get_async("/about", |_, _| async move {
-            render_template("about", "About Us").await
-        })
-        .get_async("/gospel", |_, _| async move {
-            render_template("gospel", "Gospel").await
-        })
-        .get_async("/healthcheck", |_, _| async move { Response::ok("OK") })
-        .run(req, env)
-        .await
+        .route(
+            "/gospel",
+            get(|| async { render_template("gospel", "Gospel").await }),
+        )
+        .route("/healthcheck", get(|| async { "OK" }))
+}
+
+#[event(fetch)]
+async fn fetch(
+    req: HttpRequest,
+    _env: Env,
+    _ctx: Context,
+) -> Result<axum::http::Response<axum::body::Body>> {
+    console_error_panic_hook::set_once();
+
+    // let headers = req.headers();
+    // console_log!(
+    //     "Worker request: {} {:?}, CF-Ray: {:?}, CF-IPCountry: {:?}",
+    //     req.method().to_string(),
+    //     req,
+    //     _env,
+    //     _ctx
+    // );
+
+    // Handle the request using the Axum router
+    Ok(router().call(req).await?)
 }
