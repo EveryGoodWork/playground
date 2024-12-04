@@ -1,8 +1,11 @@
 [package]
 name = "playground"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = [ "PeterMHammond" ]
+description = "A Rust playground project demonstrating Cloudflare Workers functionality."
+repository = "https://github.com/PeterMHammond/playground"
+license = "MIT"
 
 [package.metadata.release]
 release = false
